@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
+use Illuminate\Support\Facades\Auth;
 
 class MahasiswaProfileResource extends Resource
 {
@@ -25,20 +26,50 @@ class MahasiswaProfileResource extends Resource
     {
         return $form
             ->schema([
-                //
-            ]);
+                Forms\Components\TextInput::make('nama')
+                ->label('Nama')
+                ->required(),
+
+            Forms\Components\TextInput::make('nim')
+                ->label('NIM')
+                ->required()
+                ->maxLength(20),
+
+            Forms\Components\TextInput::make('prodi')
+                ->label('Program Studi')
+                ->required(),
+
+            Forms\Components\TextInput::make('angkatan')
+                ->label('Angkatan')
+                ->required()
+                ->numeric()
+                ->minValue(2000)
+                ->maxValue(date('Y')),
+        ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('nama')->searchable()->sortable(),
-                TextColumn::make('nim')->searchable(),
-                TextColumn::make('jurusan')->searchable(),
-                TextColumn::make('jenis_kelamin')->searchable(),
-                TextColumn::make('agama')->searchable(),
-                TextColumn::make('status')->searchable()
+                Tables\Columns\TextColumn::make('nama')
+                ->label('Nama')
+                ->searchable(),
+
+                Tables\Columns\TextColumn::make('nim')
+                    ->label('NIM')
+                    ->searchable(),
+
+                Tables\Columns\TextColumn::make('prodi')
+                    ->label('Prodi'),
+
+                Tables\Columns\TextColumn::make('angkatan')
+                    ->label('Angkatan'),
+
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Dibuat')
+                    ->dateTime()
+                    ->sortable(),
             ])
             ->filters([
                 //
@@ -67,5 +98,25 @@ class MahasiswaProfileResource extends Resource
             'create' => Pages\CreateMahasiswaProfile::route('/create'),
             'edit' => Pages\EditMahasiswaProfile::route('/{record}/edit'),
         ];
+    }
+
+    public static function canCreate(): bool
+    {
+        return Auth::user()?->hasRole('mahasiswa');
+    }
+
+    public static function canAccess(): bool
+    {
+        return Auth::user()?->hasAnyRole(['mahasiswa', 'dosen']);
+    }
+
+    public static function canEdit($record): bool
+    {
+        return Auth::user()?->hasRole('mahasiswa');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return Auth::user()?->hasRole('mahasiswa');
     }
 }

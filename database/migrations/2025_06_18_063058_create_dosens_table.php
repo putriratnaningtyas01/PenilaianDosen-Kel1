@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nama', 100);
             $table->string('email', 100)->unique();
             $table->string('jabatan', 50)->nullable();
+            $table->unsignedBigInteger('id_prodi');
             $table->foreign('id_prodi')->references('id')->on('prodis')->onDelete('cascade');
             $table->string('foto');
             $table->text('profil');

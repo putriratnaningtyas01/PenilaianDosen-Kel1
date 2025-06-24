@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class KriteriaPenilaian extends Model
 {
-    //
+    protected $fillable = ['nama_kriteria'];
 }

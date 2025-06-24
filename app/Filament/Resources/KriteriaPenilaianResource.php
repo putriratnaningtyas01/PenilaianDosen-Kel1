@@ -18,13 +18,17 @@ class KriteriaPenilaianResource extends Resource
 {
     protected static ?string $model = KriteriaPenilaian::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
+    protected static ?string $navigationGroup = 'Manajemen Penilaian';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('nama_kriteria')
+                    ->label('Nama Kriteria')
+                    ->required()
+                    ->maxLength(100),
             ]);
     }
 
@@ -32,7 +36,16 @@ class KriteriaPenilaianResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('id')
+                    ->sortable()
+                    ->label('ID'),
+                Tables\Columns\TextColumn::make('nama_kriteria')
+                    ->label('Nama Kriteria')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Dibuat')
+                    ->dateTime()
+                    ->sortable(),
             ])
             ->filters([
                 //
