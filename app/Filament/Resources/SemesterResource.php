@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class SemesterResource extends Resource
 {
@@ -23,7 +24,10 @@ class SemesterResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('semester')
+                    ->label('Semester')
+                    ->required()
+                    ->numeric(),
             ]);
     }
 
@@ -31,7 +35,18 @@ class SemesterResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('semester')
+                    ->label('Semester')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Dibuat')
+                    ->dateTime()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Diperbarui')
+                    ->dateTime()
+                    ->sortable(),
             ])
             ->filters([
                 //
@@ -62,8 +77,12 @@ class SemesterResource extends Resource
         ];
     }
 
-    public static function shouldRegisterNavigation(): bool
+    public static function canAccess(): bool
     {
-        return false;
+        return Auth::user()?->hasRole('mahasiswa');
     }
+    // public static function shouldRegisterNavigation(): bool
+    // {
+    //     return false;
+    // }
 }

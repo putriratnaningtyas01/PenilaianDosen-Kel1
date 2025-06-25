@@ -19,7 +19,6 @@ class KriteriaPenilaianResource extends Resource
     protected static ?string $model = KriteriaPenilaian::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
-    protected static ?string $navigationGroup = 'Manajemen Penilaian';
 
     public static function form(Form $form): Form
     {
@@ -43,7 +42,11 @@ class KriteriaPenilaianResource extends Resource
                     ->label('Nama Kriteria')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Dibuat')
+                    ->label('Dibuat Pada')
+                    ->dateTime()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Diperbarui Pada')
                     ->dateTime()
                     ->sortable(),
             ])

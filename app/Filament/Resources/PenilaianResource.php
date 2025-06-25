@@ -24,7 +24,25 @@ class PenilaianResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Select::make('id_mahasiswa')
+                    ->label('Mahasiswa')
+                    ->relationship('mahasiswa', 'nama')
+                    ->required(),
+
+                Forms\Components\Select::make('id_pengampu')
+                    ->label('Pengampu')
+                    ->relationship('pengampu', 'id') // ganti jika ingin tampilkan nama dosen/mk
+                    ->required(),
+
+                Forms\Components\Select::make('id_periode')
+                    ->label('Periode Penilaian')
+                    ->relationship('periode', 'nama_periode')
+                    ->required(),
+
+                Forms\Components\Textarea::make('komentar')
+                    ->label('Komentar')
+                    ->maxLength(1000)
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -32,7 +50,23 @@ class PenilaianResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('mahasiswa.nama')
+                    ->label('Mahasiswa'),
+
+                Tables\Columns\TextColumn::make('pengampu.dosen.nama')
+                    ->label('Dosen'),
+
+                Tables\Columns\TextColumn::make('periode.nama_periode')
+                    ->label('Periode'),
+
+                Tables\Columns\TextColumn::make('komentar')
+                    ->limit(30)
+                    ->label('Komentar'),
+
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Dibuat')
+                    ->dateTime()
+                    ->sortable(),
             ])
             ->filters([
                 //
@@ -63,7 +97,22 @@ class PenilaianResource extends Resource
         ];
     }
 
+    public static function canCreate(): bool
+    {
+        return Auth::user()?->hasRole('mahasiswa');
+    }
+
     public static function canAccess(): bool
+    {
+        return Auth::user()?->hasAnyRole(['mahasiswa', 'dosen']);
+    }
+
+    public static function canEdit($record): bool
+    {
+        return Auth::user()?->hasRole('mahasiswa');
+    }
+
+    public static function canDelete($record): bool
     {
         return Auth::user()?->hasRole('mahasiswa');
     }

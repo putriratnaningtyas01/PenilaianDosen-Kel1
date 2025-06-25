@@ -3,27 +3,47 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PenilaianDetailResource\Pages;
-use App\Filament\Resources\PenilaianDetailResource\RelationManagers;
 use App\Models\PenilaianDetail;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
+use Illuminate\Support\Facades\Auth;
 
 class PenilaianDetailResource extends Resource
 {
     protected static ?string $model = PenilaianDetail::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
+    protected static ?string $navigationLabel = 'Detail Penilaian';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Select::make('id_penilaian')
+                    ->label('Penilaian')
+                    ->relationship('penilaian', 'id')
+                    ->required(),
+
+                Select::make('id_kriteria')
+                    ->label('Kriteria')
+                    ->relationship('kriteria', 'nama_kriteria')
+                    ->required(),
+
+                Select::make('nilai')
+                    ->label('Nilai')
+                    ->options([
+                        1 => '1 - Sangat Buruk',
+                        2 => '2 - Buruk',
+                        3 => '3 - Cukup',
+                        4 => '4 - Baik',
+                        5 => '5 - Sangat Baik',
+                    ])
+                    ->required(),
             ]);
     }
 
@@ -31,13 +51,19 @@ class PenilaianDetailResource extends Resource
     {
         return $table
             ->columns([
-                //
-            ])
-            ->filters([
-                //
+                TextColumn::make('penilaian.id')
+                    ->label('ID Penilaian')
+                    ->sortable(),
+
+                TextColumn::make('kriteria.nama_kriteria')
+                    ->label('Kriteria'),
+
+                TextColumn::make('nilai')
+                    ->label('Nilai'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -48,9 +74,7 @@ class PenilaianDetailResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     public static function getPages(): array
@@ -60,5 +84,10 @@ class PenilaianDetailResource extends Resource
             'create' => Pages\CreatePenilaianDetail::route('/create'),
             'edit' => Pages\EditPenilaianDetail::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        return Auth::user()?->hasRole('dosen');
     }
 }

@@ -96,7 +96,9 @@ class DosenResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\ImageColumn::make('foto')
-                    ->label('Foto'),
+                    ->label('Foto')
+                    ->circular()
+                    ->size(40),
 
                 Tables\Columns\TextColumn::make('profil')
                     ->label('Profil')

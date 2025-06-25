@@ -6,23 +6,29 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('penilaian_details', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_penilaian')->index('id_penilaian');
-            $table->integer('id_kriteria')->index('id_kriteria');
+            $table->unsignedBigInteger('id_penilaian');
+            $table->unsignedBigInteger('id_kriteria');
             $table->integer('nilai');
             $table->timestamps();
+
+            // Foreign keys
+            $table->foreign('id_penilaian')
+                ->references('id')->on('penilaian')
+                ->onDelete('cascade');
+
+            $table->foreign('id_kriteria')
+                ->references('id')->on('kriteria_penilaian')
+                ->onDelete('cascade');
+
+            // Unique constraint to avoid duplicate criteria per penilaian
+            $table->unique(['id_penilaian', 'id_kriteria']);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('penilaian_details');

@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('penilaians', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_mahasiswa');
+            $table->foreign('id_mahasiswa')->references('id')->on('mahasiswa_profiles')->onDelete('cascade');
+            $table->unsignedBigInteger('id_pengampu');
+            $table->foreign('id_pengampu')->references('id')->on('pengampus')->onDelete('cascade');
+            $table->unsignedBigInteger('id_periode');
+            $table->foreign('id_periode')->references('id')->on('periode_penilaians')->onDelete('cascade');
+            $table->text('komentar');
             $table->timestamps();
         });
     }
@@ -20,8 +27,17 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
+    // public function down(): void
+    // {
+    //     Schema::dropIfExists('penilaians');
+    // }
+
     public function down(): void
     {
-        Schema::dropIfExists('penilaians');
+        Schema::table('penilaians', function (Blueprint $table) {
+            $table->dropForeign(['id_mahasiswa']);
+            $table->dropColumn('id_mahasiswa');
+        });
     }
 };
+
