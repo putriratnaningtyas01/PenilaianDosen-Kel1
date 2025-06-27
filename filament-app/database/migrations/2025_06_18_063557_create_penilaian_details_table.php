@@ -17,11 +17,11 @@ return new class extends Migration
 
             // Foreign keys
             $table->foreign('id_penilaian')
-                ->references('id')->on('penilaian')
+                ->references('id')->on('penilaians')
                 ->onDelete('cascade');
 
             $table->foreign('id_kriteria')
-                ->references('id')->on('kriteria_penilaian')
+                ->references('id')->on('kriteria_penilaians')
                 ->onDelete('cascade');
 
             // Unique constraint to avoid duplicate criteria per penilaian

@@ -11,6 +11,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Support\Facades\Auth;
 
 class PenilaianDetailResource extends Resource
 {
@@ -27,7 +28,11 @@ class PenilaianDetailResource extends Resource
                     ->label('Kriteria')
                     ->relationship('kriteria', 'nama_kriteria')
                     ->required(),
-
+                Select::make('id_penilaian')
+                    ->label('Komentar')
+                    ->relationship('penilaian', 'komentar')
+                    ->required(),
+                    
                 Select::make('nilai')
                     ->label('Nilai')
                     ->options([
@@ -47,6 +52,9 @@ class PenilaianDetailResource extends Resource
             ->columns([
                 TextColumn::make('kriteria.nama_kriteria')
                     ->label('Kriteria'),
+
+                TextColumn::make('penilaian.komentar')
+                    ->label('Komentar'),
 
                 TextColumn::make('nilai')
                     ->label('Nilai'),
@@ -75,4 +83,25 @@ class PenilaianDetailResource extends Resource
             'edit' => Pages\EditPenilaianDetail::route('/{record}/edit'),
         ];
     }
+    public static function canCreate(): bool
+    {
+        return Auth::user()?->hasRole('mahasiswa');
+    }
+
+    public static function canAccess(): bool
+    {
+        return Auth::user()?->hasAnyRole(['mahasiswa', 'dosen']);
+    }
+
+    public static function canEdit($record): bool
+    {
+        return Auth::user()?->hasRole('mahasiswa');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return Auth::user()?->hasRole('mahasiswa');
+    }
 }
+
+

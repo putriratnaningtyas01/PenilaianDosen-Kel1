@@ -10,14 +10,15 @@ class PenilaianDetail extends Model
     protected $table = 'penilaian_details';
 
     protected $fillable = [
+        'id_penilaian',
         'id_kriteria',
         'nilai',
     ];
 
-    // public function penilaian()
-    // {
-    //     return $this->belongsTo(Penilaian::class, 'id_penilaian');
-    // }
+    public function penilaian()
+    {
+        return $this->belongsTo(Penilaian::class, 'id_penilaian');
+    }
 
     public function kriteria()
     {

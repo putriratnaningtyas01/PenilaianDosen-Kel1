@@ -14,23 +14,30 @@ return new class extends Migration
         Schema::create('penilaians', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_mahasiswa');
-            $table->unsignedBigInteger('id_pengampu');
+            $table->foreign('id_mahasiswa')->references('id')->on('mahasiswa_profiles')->onDelete('cascade');
+            $table->unsignedBigInteger('id_dosen');
+            $table->foreign('id_dosen')->references('id')->on('dosens')->onDelete('cascade');
             $table->unsignedBigInteger('id_periode');
-            $table->text('komentar')->nullable();
+            $table->foreign('id_periode')->references('id')->on('periode_penilaians')->onDelete('cascade');
+            $table->text('komentar');
             $table->timestamps();
-
-            // Foreign keys
-            $table->foreign('id_mahasiswa')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('id_pengampu')->references('id')->on('pengampu')->onDelete('cascade');
-            $table->foreign('id_periode')->references('id')->on('periode_penilaian')->onDelete('cascade');
         });
     }
 
     /**
      * Reverse the migrations.
      */
+    // public function down(): void
+    // {
+    //     Schema::dropIfExists('penilaians');
+    // }
+
     public function down(): void
     {
-        Schema::dropIfExists('penilaians');
+        Schema::table('penilaians', function (Blueprint $table) {
+            $table->dropForeign(['id_mahasiswa']);
+            $table->dropColumn('id_mahasiswa');
+        });
     }
 };
+

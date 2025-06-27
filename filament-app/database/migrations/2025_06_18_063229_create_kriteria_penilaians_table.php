@@ -8,16 +8,18 @@ return new class extends Migration
 {
    public function up(): void
 {
-    Schema::table('kriteria_penilaians', function (Blueprint $table) {
-        $table->unsignedTinyInteger('bobot')->default(1)->after('kriteria');
-        $table->unsignedBigInteger('id_penilaian');
-    }); 
+    Schema::create('kriteria_penilaians', function (Blueprint $table) {
+    $table->id();
+    $table->string('nama_kriteria'); 
+    $table->unsignedTinyInteger('bobot')->default(1);
+    $table->timestamps();
+});
+
 }
 
 public function down(): void
 {
-    Schema::table('kriteria_penilaians', function (Blueprint $table) {
-    });
+    Schema::dropIfExists('kriteria_penilaians');
 }
 
 };

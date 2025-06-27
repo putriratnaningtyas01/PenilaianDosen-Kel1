@@ -26,25 +26,27 @@ class MahasiswaProfileResource extends Resource
     {
         return $form
             ->schema([
+
                 Forms\Components\TextInput::make('nama')
-                ->label('Nama')
-                ->required(),
+                    ->label('Nama Mahasiswa')
+                    ->required()
+                    ->maxLength(20),
 
-            Forms\Components\TextInput::make('nim')
-                ->label('NIM')
-                ->required()
-                ->maxLength(20),
+                Forms\Components\TextInput::make('nim')
+                    ->label('NIM')
+                    ->required()
+                    ->maxLength(20),
 
-            Forms\Components\TextInput::make('prodi')
-                ->label('Program Studi')
-                ->required(),
+                Forms\Components\TextInput::make('prodi')
+                    ->label('Program Studi')
+                    ->required(),
 
-            Forms\Components\TextInput::make('angkatan')
-                ->label('Angkatan')
-                ->required()
-                ->numeric()
-                ->minValue(2000)
-                ->maxValue(date('Y')),
+                Forms\Components\TextInput::make('angkatan')
+                    ->label('Angkatan')
+                    ->required()
+                    ->numeric()
+                    ->minValue(2000)
+                    ->maxValue(date('Y')),
         ]);
     }
 
@@ -53,8 +55,8 @@ class MahasiswaProfileResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
-                ->label('Nama')
-                ->searchable(),
+                    ->label('Nama Mahasiswa')
+                    ->searchable(),
 
                 Tables\Columns\TextColumn::make('nim')
                     ->label('NIM')
@@ -76,6 +78,7 @@ class MahasiswaProfileResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

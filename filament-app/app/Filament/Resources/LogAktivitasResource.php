@@ -23,7 +23,17 @@ class LogAktivitasResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Select::make('user_id')
+                    ->label('Mahasiswa')
+                    ->relationship('user', 'name')
+                    ->required(),
+                Forms\Components\TextInput::make('aktivitas')
+                    ->label('Aktivitas')
+                    ->required(),
+                Forms\Components\DateTimePicker::make('waktu')
+                    ->label('Waktu')
+                    ->required()
+                    ->seconds(true),
             ]);
     }
 
@@ -31,13 +41,25 @@ class LogAktivitasResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('user.name')
+                    ->label('Mahasiswa')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('aktivitas')
+                    ->label('Aktivitas')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('waktu')
+                    ->label('Waktu')
+                    ->dateTime('d/m/Y H:i')
+                    ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

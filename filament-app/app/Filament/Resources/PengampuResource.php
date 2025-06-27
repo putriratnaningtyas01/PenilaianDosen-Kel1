@@ -24,7 +24,20 @@ class PengampuResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Select::make('id_dosen')
+                    ->label('Dosen Pengampu')
+                    ->relationship('dosen', 'nama')
+                    ->required(),
+
+                Forms\Components\Select::make('id_mk')
+                    ->label('Mata Kuliah')
+                    ->relationship('mataKuliah', 'nama_mk')
+                    ->required(),
+
+                Forms\Components\Select::make('id_semester')
+                    ->label('Semester')
+                    ->relationship('semester', 'nama_semester')
+                    ->required(),
             ]);
     }
 
@@ -32,13 +45,17 @@ class PengampuResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('dosen.nama')->label('Dosen'),
+                Tables\Columns\TextColumn::make('mataKuliah.nama_mk')->label('Mata Kuliah'),
+                Tables\Columns\TextColumn::make('semester.nama_semester')->label('Semester'),
+                Tables\Columns\TextColumn::make('created_at')->label('Dibuat')->dateTime()->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
