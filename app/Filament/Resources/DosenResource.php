@@ -18,7 +18,7 @@ class DosenResource extends Resource
 {
     protected static ?string $model = Dosen::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-user';
 
     public static function form(Form $form): Form
     {
@@ -43,7 +43,7 @@ class DosenResource extends Resource
 
                 Forms\Components\Select::make('id_prodi')
                     ->label('Program Studi')
-                    ->relationship('prodi', 'nama_prodi') 
+                    ->relationship('prodi', 'nama_prodi')
                     ->required(),
 
                 Forms\Components\FileUpload::make('foto')
@@ -96,9 +96,7 @@ class DosenResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\ImageColumn::make('foto')
-                    ->label('Foto')
-                    ->circular()
-                    ->size(40),
+                    ->label('Foto'),
 
                 Tables\Columns\TextColumn::make('profil')
                     ->label('Profil')
@@ -116,6 +114,7 @@ class DosenResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -144,4 +143,5 @@ class DosenResource extends Resource
     {
         return Auth::user()?->hasRole('dosen');
     }
+
 }

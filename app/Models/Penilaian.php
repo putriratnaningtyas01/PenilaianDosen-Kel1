@@ -11,7 +11,7 @@ class Penilaian extends Model
 
     protected $fillable = [
         'id_mahasiswa',
-        'id_pengampu',
+        'id_dosen',
         'id_periode',
         'komentar',
     ];
@@ -23,9 +23,9 @@ class Penilaian extends Model
     }
 
     // Relasi ke Pengampu
-    public function pengampu()
+    public function dosen()
     {
-        return $this->belongsTo(Pengampu::class, 'id_pengampu');
+        return $this->belongsTo(Dosen::class, 'id_dosen');
     }
 
     // Relasi ke Periode Penilaian

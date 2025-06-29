@@ -18,7 +18,7 @@ class PenilaianResource extends Resource
 {
     protected static ?string $model = Penilaian::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-chart-bar';
 
     public static function form(Form $form): Form
     {
@@ -29,9 +29,9 @@ class PenilaianResource extends Resource
                     ->relationship('mahasiswa', 'nama')
                     ->required(),
 
-                Forms\Components\Select::make('id_pengampu')
-                    ->label('Pengampu')
-                    ->relationship('pengampu', 'id') // ganti jika ingin tampilkan nama dosen/mk
+                Forms\Components\Select::make('id_dosen')
+                    ->label('Dosen')
+                    ->relationship('dosen', 'nama') // ganti jika ingin tampilkan nama dosen/mk
                     ->required(),
 
                 Forms\Components\Select::make('id_periode')
@@ -53,7 +53,7 @@ class PenilaianResource extends Resource
                 Tables\Columns\TextColumn::make('mahasiswa.nama')
                     ->label('Mahasiswa'),
 
-                Tables\Columns\TextColumn::make('pengampu.dosen.nama')
+                Tables\Columns\TextColumn::make('dosen.nama')
                     ->label('Dosen'),
 
                 Tables\Columns\TextColumn::make('periode.nama_periode')
@@ -64,15 +64,21 @@ class PenilaianResource extends Resource
                     ->label('Komentar'),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Dibuat')
-                    ->dateTime()
-                    ->sortable(),
+                ->label('Dibuat')
+                ->dateTime()
+                ->sortable(),
+
+                Tables\Columns\TextColumn::make('updated_at')
+                ->label('Diperbarui')
+                ->dateTime()
+                ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

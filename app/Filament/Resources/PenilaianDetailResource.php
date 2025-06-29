@@ -17,31 +17,30 @@ class PenilaianDetailResource extends Resource
 {
     protected static ?string $model = PenilaianDetail::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
+    protected static ?string $navigationIcon = 'heroicon-s-clipboard-document-list';
     protected static ?string $navigationLabel = 'Detail Penilaian';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Select::make('id_penilaian')
-                    ->label('Penilaian')
-                    ->relationship('penilaian', 'id')
-                    ->required(),
-
                 Select::make('id_kriteria')
                     ->label('Kriteria')
                     ->relationship('kriteria', 'nama_kriteria')
+                    ->required(),
+                Select::make('id_penilaian')
+                    ->label('Komentar')
+                    ->relationship('penilaian', 'komentar')
                     ->required(),
 
                 Select::make('nilai')
                     ->label('Nilai')
                     ->options([
-                        1 => '1 - Sangat Buruk',
-                        2 => '2 - Buruk',
-                        3 => '3 - Cukup',
-                        4 => '4 - Baik',
-                        5 => '5 - Sangat Baik',
+                        'Sangat Buruk' => '1 - Sangat Buruk',
+                        'Buruk' => '2 - Buruk',
+                        'Cukup' => '3 - Cukup',
+                        'Baik' => '4 - Baik',
+                        'Sangat Baik' => '5 - Sangat Baik',
                     ])
                     ->required(),
             ]);
@@ -51,15 +50,24 @@ class PenilaianDetailResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('penilaian.id')
-                    ->label('ID Penilaian')
-                    ->sortable(),
-
                 TextColumn::make('kriteria.nama_kriteria')
                     ->label('Kriteria'),
 
+                TextColumn::make('penilaian.komentar')
+                    ->label('Komentar'),
+
                 TextColumn::make('nilai')
                     ->label('Nilai'),
+
+                Tables\Columns\TextColumn::make('created_at')
+                ->label('Dibuat')
+                ->dateTime()
+                ->sortable(),
+
+                Tables\Columns\TextColumn::make('updated_at')
+                ->label('Diperbarui')
+                ->dateTime()
+                ->sortable(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -85,9 +93,24 @@ class PenilaianDetailResource extends Resource
             'edit' => Pages\EditPenilaianDetail::route('/{record}/edit'),
         ];
     }
+    public static function canCreate(): bool
+    {
+        return Auth::user()?->hasRole('mahasiswa');
+    }
 
     public static function canAccess(): bool
     {
-        return Auth::user()?->hasRole('dosen');
+        return Auth::user()?->hasAnyRole(['mahasiswa', 'dosen']);
+    }
+
+    public static function canEdit($record): bool
+    {
+        return Auth::user()?->hasRole('mahasiswa');
+    }
+
+    public static function canDelete($record): bool
+    {
+        return Auth::user()?->hasRole('mahasiswa');
     }
 }
+

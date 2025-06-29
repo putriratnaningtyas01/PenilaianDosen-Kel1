@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_mahasiswa');
             $table->foreign('id_mahasiswa')->references('id')->on('mahasiswa_profiles')->onDelete('cascade');
-            $table->unsignedBigInteger('id_pengampu');
-            $table->foreign('id_pengampu')->references('id')->on('pengampus')->onDelete('cascade');
+            $table->unsignedBigInteger('id_dosen');
+            $table->foreign('id_dosen')->references('id')->on('dosens')->onDelete('cascade');
             $table->unsignedBigInteger('id_periode');
             $table->foreign('id_periode')->references('id')->on('periode_penilaians')->onDelete('cascade');
             $table->text('komentar');
@@ -40,4 +40,3 @@ return new class extends Migration
         });
     }
 };
-

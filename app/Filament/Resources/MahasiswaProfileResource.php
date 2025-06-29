@@ -6,6 +6,7 @@ use App\Filament\Resources\MahasiswaProfileResource\Pages;
 use App\Filament\Resources\MahasiswaProfileResource\RelationManagers;
 use App\Models\MahasiswaProfile;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -20,7 +21,7 @@ class MahasiswaProfileResource extends Resource
 {
     protected static ?string $model = MahasiswaProfile::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-identification';
 
     public static function form(Form $form): Form
     {
@@ -37,6 +38,14 @@ class MahasiswaProfileResource extends Resource
                     ->required()
                     ->maxLength(20),
 
+                Select::make('jenis_kelamin')
+                    ->label('Jenis Kelamin')
+                    ->options([
+                        'Laki-Laki' => 'Laki-Laki',
+                        'Perempuan' => 'Perempuan',
+                    ])
+                    ->required(),
+
                 Forms\Components\TextInput::make('prodi')
                     ->label('Program Studi')
                     ->required(),
@@ -47,7 +56,7 @@ class MahasiswaProfileResource extends Resource
                     ->numeric()
                     ->minValue(2000)
                     ->maxValue(date('Y')),
-        ]);
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -62,6 +71,10 @@ class MahasiswaProfileResource extends Resource
                     ->label('NIM')
                     ->searchable(),
 
+                Tables\Columns\TextColumn::make('jenis_kelamin')
+                    ->label('Jenis Kelamin')
+                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('prodi')
                     ->label('Prodi'),
 
@@ -72,12 +85,22 @@ class MahasiswaProfileResource extends Resource
                     ->label('Dibuat')
                     ->dateTime()
                     ->sortable(),
+
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Diperbarui')
+                    ->dateTime()
+                    ->sortable(),
             ])
             ->filters([
-                //
+                SelectFilter::make('jenis_kelamin')
+                    ->options([
+                        'Laki-Laki' => 'Laki-Laki',
+                        'Perempuan' => 'Perempuan',
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

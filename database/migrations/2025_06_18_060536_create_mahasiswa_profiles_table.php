@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('mahasiswa_profiles', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->integer('nim', 20)->unique();
+            $table->integer('nim')->unique();
+            $table->string('jenis_kelamin')->nullable();
             $table->string('prodi', 100);
             $table->year('angkatan');
             $table->timestamps();

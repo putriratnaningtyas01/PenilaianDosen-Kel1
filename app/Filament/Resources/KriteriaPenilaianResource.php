@@ -10,24 +10,25 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
 
 class KriteriaPenilaianResource extends Resource
 {
     protected static ?string $model = KriteriaPenilaian::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
+    protected static ?string $navigationIcon = 'heroicon-s-clipboard-document-check';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama_kriteria')
-                    ->label('Nama Kriteria')
-                    ->required()
-                    ->maxLength(100),
+                Forms\Components\Card::make([
+                    Forms\Components\TextInput::make('nama_kriteria')
+                        ->label('Nama Kriteria')
+                        ->required()
+                        ->maxLength(100),
+
+                ])
             ]);
     }
 
@@ -38,23 +39,24 @@ class KriteriaPenilaianResource extends Resource
                 Tables\Columns\TextColumn::make('id')
                     ->sortable()
                     ->label('ID'),
+
                 Tables\Columns\TextColumn::make('nama_kriteria')
                     ->label('Nama Kriteria')
                     ->searchable(),
+
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Dibuat Pada')
+                    ->label('Dibuat')
                     ->dateTime()
                     ->sortable(),
+
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Diperbarui Pada')
+                    ->label('Diperbarui')
                     ->dateTime()
-                    ->sortable(),
-            ])
-            ->filters([
-                //
+                    ->sortable()
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -65,9 +67,7 @@ class KriteriaPenilaianResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
+        return [];
     }
 
     public static function getPages(): array

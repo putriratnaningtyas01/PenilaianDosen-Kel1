@@ -14,29 +14,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
-        $this->call([
-            MahasiswaProfileSeeder::class,
-            DosenSeeder::class,
-            KriteriaPenilaianSeeder::class,
-            PenilaianDetailSeeder::class, 
-            PeriodePenilaianSeeder::class,
-            MataKuliahSeeder::class,
-            ProdiSeeder::class,
-            SemesterSeeder::class,
-            PengampuSeeder::class,
-            LogAktivitasSeeder::class
-        ]);
-
         // ✅ Tambahkan role
+        Role::firstOrCreate(['name' => 'admin']);
         Role::firstOrCreate(['name' => 'dosen']);
         Role::firstOrCreate(['name' => 'mahasiswa']);
+
+
+        // ✅ Tambahkan user admin
+        $admin = User::firstOrCreate(
+            ['email' => 'admin@gmail.com'],
+            [
+                'name' => 'Admin',
+                'password' => bcrypt('adminsatu'),
+                'role' => 'admin',
+            ]
+        );
+        $admin->assignRole('admin');
 
         // ✅ Tambahkan user dosen
         $dosen = User::firstOrCreate(
@@ -44,6 +37,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Dosen',
                 'password' => bcrypt('dosensatu'),
+                'role' => 'dosen',
             ]
         );
         $dosen->assignRole('dosen');
@@ -54,8 +48,22 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Mahasiswa',
                 'password' => bcrypt('mahasiswasatu'),
+                'role' => 'mahasiswa',
             ]
         );
         $mahasiswa->assignRole('mahasiswa');
+
+        $this->call([
+            ProdiSeeder::class,
+            SemesterSeeder::class,
+            MataKuliahSeeder::class,
+            DosenSeeder::class,
+            MahasiswaProfileSeeder::class,
+            PengampuSeeder::class,
+            PeriodePenilaianSeeder::class,
+            KriteriaPenilaianSeeder::class,
+            PenilaianSeeder::class,
+            PenilaianDetailSeeder::class,
+        ]);
     }
 }

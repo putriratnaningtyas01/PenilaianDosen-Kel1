@@ -18,16 +18,17 @@ class SemesterResource extends Resource
 {
     protected static ?string $model = Semester::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-numbered-list';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('semester')
-                    ->label('Semester')
+                Forms\Components\TextInput::make('nama_semester')
+                    ->label('Nama Semester')
                     ->required()
-                    ->numeric(),
+                    ->maxLength(20),
+
             ]);
     }
 
@@ -35,10 +36,10 @@ class SemesterResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('semester')
-                    ->label('Semester')
-                    ->searchable()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('nama_semester')
+                    ->label('Nama Semester')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Dibuat')
                     ->dateTime()
@@ -53,6 +54,7 @@ class SemesterResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -84,5 +86,6 @@ class SemesterResource extends Resource
     // public static function shouldRegisterNavigation(): bool
     // {
     //     return false;
-    // }
+    //
+
 }

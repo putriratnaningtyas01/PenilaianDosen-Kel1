@@ -18,7 +18,7 @@ class MataKuliahResource extends Resource
 {
     protected static ?string $model = MataKuliah::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-book-open';
 
     public static function form(Form $form): Form
     {
@@ -70,20 +70,19 @@ class MataKuliahResource extends Resource
             Tables\Columns\TextColumn::make('created_at')
                 ->label('Dibuat')
                 ->dateTime()
-                ->sortable()
-                ->toggleable(isToggledHiddenByDefault: true),
+                ->sortable(),
 
             Tables\Columns\TextColumn::make('updated_at')
                 ->label('Diperbarui')
                 ->dateTime()
-                ->sortable()
-                ->toggleable(isToggledHiddenByDefault: true),
+                ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
