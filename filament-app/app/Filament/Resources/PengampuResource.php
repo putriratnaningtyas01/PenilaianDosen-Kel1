@@ -18,7 +18,7 @@ class PengampuResource extends Resource
 {
     protected static ?string $model = Pengampu::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-user-group';
 
     public static function form(Form $form): Form
     {
@@ -49,6 +49,10 @@ class PengampuResource extends Resource
                 Tables\Columns\TextColumn::make('mataKuliah.nama_mk')->label('Mata Kuliah'),
                 Tables\Columns\TextColumn::make('semester.nama_semester')->label('Semester'),
                 Tables\Columns\TextColumn::make('created_at')->label('Dibuat')->dateTime()->sortable(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Diperbarui')
+                    ->dateTime()
+                    ->sortable(),
             ])
             ->filters([
                 //
@@ -56,6 +60,9 @@ class PengampuResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                 Tables\Actions\ViewAction::make()
+                    ->label('Lihat'),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -77,6 +84,7 @@ class PengampuResource extends Resource
             'index' => Pages\ListPengampus::route('/'),
             'create' => Pages\CreatePengampu::route('/create'),
             'edit' => Pages\EditPengampu::route('/{record}/edit'),
+             'view' => Pages\ViewPengampu::route('/{record}'),
         ];
     }
 

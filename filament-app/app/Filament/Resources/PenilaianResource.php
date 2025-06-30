@@ -18,7 +18,7 @@ class PenilaianResource extends Resource
 {
     protected static ?string $model = Penilaian::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-chart-bar';
 
     public static function form(Form $form): Form
     {
@@ -64,9 +64,14 @@ class PenilaianResource extends Resource
                     ->label('Komentar'),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label('Dibuat')
-                    ->dateTime()
-                    ->sortable(),
+                ->label('Dibuat')
+                ->dateTime()
+                ->sortable(),
+
+                Tables\Columns\TextColumn::make('updated_at')
+                ->label('Diperbarui')
+                ->dateTime()
+                ->sortable(),
             ])
             ->filters([
                 //
@@ -74,10 +79,13 @@ class PenilaianResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->label('Lihat'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    
                 ]),
             ]);
     }
@@ -95,6 +103,7 @@ class PenilaianResource extends Resource
             'index' => Pages\ListPenilaians::route('/'),
             'create' => Pages\CreatePenilaian::route('/create'),
             'edit' => Pages\EditPenilaian::route('/{record}/edit'),
+            'view' => Pages\ViewPenilaian::route('/{record}'),
         ];
     }
 

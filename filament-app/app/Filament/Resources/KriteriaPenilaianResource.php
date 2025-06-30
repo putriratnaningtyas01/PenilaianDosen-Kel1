@@ -16,7 +16,7 @@ class KriteriaPenilaianResource extends Resource
 {
     protected static ?string $model = KriteriaPenilaian::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
+    protected static ?string $navigationIcon = 'heroicon-s-clipboard-document-check';
 
     public static function form(Form $form): Form
     {
@@ -43,15 +43,22 @@ class KriteriaPenilaianResource extends Resource
                 Tables\Columns\TextColumn::make('nama_kriteria')
                     ->label('Nama Kriteria')
                     ->searchable(),
-                    
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Dibuat')
                     ->dateTime()
                     ->sortable(),
+
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Diperbarui')
+                    ->dateTime()
+                    ->sortable()
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->label('Lihat'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -71,6 +78,7 @@ class KriteriaPenilaianResource extends Resource
             'index' => Pages\ListKriteriaPenilaians::route('/'),
             'create' => Pages\CreateKriteriaPenilaian::route('/create'),
             'edit' => Pages\EditKriteriaPenilaian::route('/{record}/edit'),
+            'view' => Pages\ViewKriteriaPenilaian::route('/{record}'),
         ];
     }
 

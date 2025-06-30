@@ -6,6 +6,7 @@ use App\Filament\Resources\DosenResource\Pages;
 use App\Filament\Resources\DosenResource\RelationManagers;
 use App\Models\Dosen;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -18,7 +19,7 @@ class DosenResource extends Resource
 {
     protected static ?string $model = Dosen::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-user';
 
     public static function form(Form $form): Form
     {
@@ -43,7 +44,7 @@ class DosenResource extends Resource
 
                 Forms\Components\Select::make('id_prodi')
                     ->label('Program Studi')
-                    ->relationship('prodi', 'nama_prodi') 
+                    ->relationship('prodi', 'nama_prodi')
                     ->required(),
 
                 Forms\Components\FileUpload::make('foto')
@@ -115,11 +116,9 @@ class DosenResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                Tables\Actions\ViewAction::make()
+    ->label('Lihat')
+    ->modalHeading('Detail Dosen')
             ]);
     }
 
@@ -136,6 +135,7 @@ class DosenResource extends Resource
             'index' => Pages\ListDosens::route('/'),
             'create' => Pages\CreateDosen::route('/create'),
             'edit' => Pages\EditDosen::route('/{record}/edit'),
+            'view' => Pages\ViewDosen::route('/{record}'),
         ];
     }
 
@@ -143,4 +143,5 @@ class DosenResource extends Resource
     {
         return Auth::user()?->hasRole('dosen');
     }
+
 }

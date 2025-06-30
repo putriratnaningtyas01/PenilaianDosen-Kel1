@@ -10,9 +10,10 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
 
     <title>Penilaian Dosen</title>
-    
+
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="{{asset('assets/css/fontawesome.css')}}">
@@ -20,7 +21,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/owl.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/lightbox.css')}}">
 <!--
-    
+
 TemplateMo 557 Grad School
 
 https://templatemo.com/tm-557-grad-school
@@ -30,7 +31,7 @@ https://templatemo.com/tm-557-grad-school
 
 <body>
 
-   
+
   <!--header-->
   <header class="main-header clearfix" role="header" style="background-color: rgb(0, 102, 204);">
     <div class="logo">
@@ -51,7 +52,7 @@ https://templatemo.com/tm-557-grad-school
         <li><a href="#section4">Dosen</a></li>
         <!-- <li><a href="#section5">Video</a></li> -->
         <li><a href="#section6">Contact</a></li>
-        <li><a href="https://nurulfikri.ac.id/" class="external">STT Terpadu Nurul Fikri</a></li>
+        <li><a href="https://nurulfikri.ac.id/" class="external" target="__blank">STT Terpadu Nurul Fikri</a></li>
       </ul>
     </nav>
   </header>
@@ -66,9 +67,9 @@ https://templatemo.com/tm-557-grad-school
           <div class="caption">
               <h6>SISTEM PENILAIAN KINERJA DOSEN</h6>
               <h2><em>EVALUASI</em> KINERJA DOSEN</h2>
-              <div class="main-button">
-                  <div class="scroll-to-section"><a href="#section3">MULAI PENILAIAN</a></div>
-              </div>
+              {{-- <div class="main-button"> --}}
+                  <a href="{{url('kelompok1')}}" class="btn btn-warning text-light text-lg">MULAI PENILAIAN</a>
+              {{-- </div> --}}
           </div>
       </div>
   </section>
@@ -156,7 +157,7 @@ https://templatemo.com/tm-557-grad-school
                   </div>
                   <div class="col-md-6">
                     <h4>Manfaat bagi Mahasiswa</h4>
-                    <p>Mahasiswa dapat menyampaikan pendapat secara terbuka dan membantu memperbaiki sistem pembelajaran melalui masukan yang membangun.</p> 
+                    <p>Mahasiswa dapat menyampaikan pendapat secara terbuka dan membantu memperbaiki sistem pembelajaran melalui masukan yang membangun.</p>
                   </div>
                 </div>
               </article>
@@ -178,10 +179,10 @@ https://templatemo.com/tm-557-grad-school
     </div>
   </section>
 
-  <section class="section coming-soon" data-section="section3">
+  {{-- <section class="section coming-soon" data-section="section3">
     <div class="container">
       <div class="row">
-        <div class="col-md-7 col-xs-12">
+        <div class="col-md-6 col-xs-12">
           <div class="continer centerIt">
             <div>
               <h4>Berikan <em>Penilaianmu</em> dan Bantu Tingkatkan Kualitas Pengajaran di Kampus </h4>
@@ -213,36 +214,36 @@ https://templatemo.com/tm-557-grad-school
             </div>
           </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-6">
           <div class="right-content">
             <div class="top-content">
               <h6>Masukkan <em>Akun anda</em> untuk Melanjutkan Penilaian Dosen Secara Aman dan Mudah</h6>
             </div>
             <!-- ini login ke dashboard -->
-            <form id="contact" action="" method="get">
+            {{-- <form id="contact" action="" method="get"> --}}
               <div class="row">
-                <div class="col-md-12">
-                  <fieldset>
+                {{-- <div class="col-md-12"> --}}
+                  {{-- <fieldset>
                     <input name="name" type="text" class="form-control" id="name" placeholder="Your Email" required="">
-                  </fieldset>
-                </div>
-                <div class="col-md-12">
-                  <fieldset>
+                  </fieldset> --}}
+                {{-- </div> --}}
+                {{-- <div class="col-md-12"> --}}
+                  {{-- <fieldset>
                     <input name="email" type="text" class="form-control" id="email" placeholder="Your Password" required="">
-                  </fieldset>
-                </div>
+                  </fieldset> --}}
+                {{-- </div> --}}
                 <div class="col-md-12">
-                  <fieldset>
-                    <button type="submit" id="form-submit" class="button">Login sekarang</button>
-                  </fieldset>
+                  {{-- <fieldset> --}}
+                    <button type="submit" id="form-submit" class="btn btn-warning">Login sekarang</button>
+                  {{-- </fieldset> --}}
                 </div>
               </div>
-            </form>
+            {{-- </form> --}}
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </section> --}}
 
   <section class="section courses" data-section="section4">
     <div class="container-fluid">
@@ -298,7 +299,7 @@ https://templatemo.com/tm-557-grad-school
             <div class="down-content">
               <h4>Drs. RUSMANTO, M.M.</h4>
               <h4>Pembelajaran</h4>
-              <p>Bahasa Indonesia</p>  
+              <p>Bahasa Indonesia</p>
             </div>
           </div>
           <div class="item">
@@ -321,7 +322,7 @@ https://templatemo.com/tm-557-grad-school
       </div>
     </div>
   </section>
-  
+
 
   <section class="section video" data-section="section5">
     <div class="container">
@@ -357,11 +358,11 @@ https://templatemo.com/tm-557-grad-school
           </div>
         </div>
         <div class="col-md-6">
-        
+
         <!-- Do you need a working HTML contact-form script?
-                	
+
                     Please visit https://templatemo.com/contact page -->
-                    
+
           <form id="contact" action="" method="post">
             <div class="row">
               <div class="col-md-6">
@@ -389,13 +390,13 @@ https://templatemo.com/tm-557-grad-school
         </div>
         <div class="col-md-6">
           <div id="map">
-            <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.317561852959!2d106.83004867471773!3d-6.352919162151296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ec6b07b68ea5%3A0x17da46bdf9308386!2sSTT%20Terpadu%20Nurul%20Fikri%20-%20Kampus%20B!5e0!3m2!1sid!2sid!4v1750159680753!5m2!1sid!2sid" 
-                width="100%" 
-                height="422" 
-                style="border:0;" 
-                allowfullscreen="" 
-                loading="lazy" 
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.317561852959!2d106.83004867471773!3d-6.352919162151296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ec6b07b68ea5%3A0x17da46bdf9308386!2sSTT%20Terpadu%20Nurul%20Fikri%20-%20Kampus%20B!5e0!3m2!1sid!2sid!4v1750159680753!5m2!1sid!2sid"
+                width="100%"
+                height="422"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade">
             </iframe>
           </div>
@@ -408,10 +409,10 @@ https://templatemo.com/tm-557-grad-school
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <p><i class="fa fa-copyright"></i> Copyright 2025 by Syamil 
-          
+          <p><i class="fa fa-copyright"></i> Copyright 2025 by Syamil
+
            | Design: <a href="https://templatemo.com" rel="sponsored" target="_parent">Penilaian Dosen</a><br>
-          
+
           </p>
         </div>
       </div>
@@ -422,6 +423,7 @@ https://templatemo.com/tm-557-grad-school
   <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
     <script src="{{asset('assets/js/isotope.min.js')}}"></script>
     <script src="{{asset('assets/js/owl-carousel.js')}}"></script>

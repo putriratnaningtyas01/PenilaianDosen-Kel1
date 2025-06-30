@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_penilaian');
             $table->unsignedBigInteger('id_kriteria');
-            $table->integer('nilai');
+            $table->string('nilai');
             $table->timestamps();
 
             // Foreign keys
@@ -24,8 +24,6 @@ return new class extends Migration
                 ->references('id')->on('kriteria_penilaians')
                 ->onDelete('cascade');
 
-            // Unique constraint to avoid duplicate criteria per penilaian
-            $table->unique(['id_penilaian', 'id_kriteria']);
         });
     }
 

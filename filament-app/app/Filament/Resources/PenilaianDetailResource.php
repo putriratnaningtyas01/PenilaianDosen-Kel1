@@ -17,7 +17,7 @@ class PenilaianDetailResource extends Resource
 {
     protected static ?string $model = PenilaianDetail::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
+    protected static ?string $navigationIcon = 'heroicon-s-clipboard-document-list';
     protected static ?string $navigationLabel = 'Detail Penilaian';
 
     public static function form(Form $form): Form
@@ -32,15 +32,15 @@ class PenilaianDetailResource extends Resource
                     ->label('Komentar')
                     ->relationship('penilaian', 'komentar')
                     ->required(),
-                    
+
                 Select::make('nilai')
                     ->label('Nilai')
                     ->options([
-                        1 => '1 - Sangat Buruk',
-                        2 => '2 - Buruk',
-                        3 => '3 - Cukup',
-                        4 => '4 - Baik',
-                        5 => '5 - Sangat Baik',
+                        'Sangat Buruk' => '1 - Sangat Buruk',
+                        'Buruk' => '2 - Buruk',
+                        'Cukup' => '3 - Cukup',
+                        'Baik' => '4 - Baik',
+                        'Sangat Baik' => '5 - Sangat Baik',
                     ])
                     ->required(),
             ]);
@@ -58,10 +58,22 @@ class PenilaianDetailResource extends Resource
 
                 TextColumn::make('nilai')
                     ->label('Nilai'),
+
+                Tables\Columns\TextColumn::make('created_at')
+                ->label('Dibuat')
+                ->dateTime()
+                ->sortable(),
+
+                Tables\Columns\TextColumn::make('updated_at')
+                ->label('Diperbarui')
+                ->dateTime()
+                ->sortable(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                 Tables\Actions\ViewAction::make()
+                     ->label('Lihat'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -81,6 +93,7 @@ class PenilaianDetailResource extends Resource
             'index' => Pages\ListPenilaianDetails::route('/'),
             'create' => Pages\CreatePenilaianDetail::route('/create'),
             'edit' => Pages\EditPenilaianDetail::route('/{record}/edit'),
+            'view' => Pages\ViewPenilaianDetail::route('/{record}'),
         ];
     }
     public static function canCreate(): bool
@@ -103,5 +116,4 @@ class PenilaianDetailResource extends Resource
         return Auth::user()?->hasRole('mahasiswa');
     }
 }
-
 

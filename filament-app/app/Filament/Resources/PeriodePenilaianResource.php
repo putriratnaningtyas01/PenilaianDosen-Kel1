@@ -18,7 +18,7 @@ class PeriodePenilaianResource extends Resource
 {
     protected static ?string $model = PeriodePenilaian::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-clock';
 
     public static function form(Form $form): Form
     {
@@ -90,6 +90,8 @@ class PeriodePenilaianResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                 Tables\Actions\ViewAction::make()
+                     ->label('Lihat'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -111,6 +113,7 @@ class PeriodePenilaianResource extends Resource
             'index' => Pages\ListPeriodePenilaians::route('/'),
             'create' => Pages\CreatePeriodePenilaian::route('/create'),
             'edit' => Pages\EditPeriodePenilaian::route('/{record}/edit'),
+            'view' => Pages\ViewPeriodePenilaian::route('/{record}'),
         ];
     }
 

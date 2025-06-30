@@ -18,7 +18,7 @@ class SemesterResource extends Resource
 {
     protected static ?string $model = Semester::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-numbered-list';
 
     public static function form(Form $form): Form
     {
@@ -55,6 +55,9 @@ class SemesterResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->label('Lihat'),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -76,6 +79,7 @@ class SemesterResource extends Resource
             'index' => Pages\ListSemesters::route('/'),
             'create' => Pages\CreateSemester::route('/create'),
             'edit' => Pages\EditSemester::route('/{record}/edit'),
+            'view' => Pages\ViewSemester::route('/{record}'),
         ];
     }
 

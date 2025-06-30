@@ -18,7 +18,7 @@ class ProdiResource extends Resource
 {
     protected static ?string $model = Prodi::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-academic-cap';
 
     public static function form(Form $form): Form
     {
@@ -56,6 +56,8 @@ class ProdiResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                 Tables\Actions\ViewAction::make()
+                     ->label('Lihat'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -77,6 +79,7 @@ class ProdiResource extends Resource
             'index' => Pages\ListProdis::route('/'),
             'create' => Pages\CreateProdi::route('/create'),
             'edit' => Pages\EditProdi::route('/{record}/edit'),
+            'view' => Pages\ViewProdi::route('/{record}'),
         ];
     }
 

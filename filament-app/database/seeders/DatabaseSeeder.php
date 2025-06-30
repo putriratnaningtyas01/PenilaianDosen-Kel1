@@ -15,8 +15,21 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // ✅ Tambahkan role
+        Role::firstOrCreate(['name' => 'admin']);
         Role::firstOrCreate(['name' => 'dosen']);
         Role::firstOrCreate(['name' => 'mahasiswa']);
+
+
+        // ✅ Tambahkan user admin
+        $admin = User::firstOrCreate(
+            ['email' => 'admin@gmail.com'],
+            [
+                'name' => 'Admin',
+                'password' => bcrypt('adminsatu'),
+                'role' => 'admin',
+            ]
+        );
+        $admin->assignRole('admin');
 
         // ✅ Tambahkan user dosen
         $dosen = User::firstOrCreate(
@@ -24,6 +37,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Dosen',
                 'password' => bcrypt('dosensatu'),
+                'role' => 'dosen',
             ]
         );
         $dosen->assignRole('dosen');
@@ -34,6 +48,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Mahasiswa',
                 'password' => bcrypt('mahasiswasatu'),
+                'role' => 'mahasiswa',
             ]
         );
         $mahasiswa->assignRole('mahasiswa');
@@ -49,7 +64,6 @@ class DatabaseSeeder extends Seeder
             KriteriaPenilaianSeeder::class,
             PenilaianSeeder::class,
             PenilaianDetailSeeder::class,
-            LogAktivitasSeeder::class,
         ]);
     }
 }
