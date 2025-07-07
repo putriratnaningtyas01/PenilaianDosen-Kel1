@@ -234,7 +234,6 @@ https://templatemo.com/tm-557-grad-school
                 {{-- </div> --}}
                 <div class="col-md-12">
                   {{-- <fieldset> --}}
-                    <button type="submit" id="form-submit" class="btn btn-warning">Login sekarang</button>
                   {{-- </fieldset> --}}
                 </div>
               </div>
@@ -243,7 +242,7 @@ https://templatemo.com/tm-557-grad-school
         </div>
       </div>
     </div>
-  </section> --}}
+  {{-- </section>  --}}
 
   <section class="section courses" data-section="section4">
     <div class="container-fluid">
@@ -329,9 +328,9 @@ https://templatemo.com/tm-557-grad-school
       <div class="row">
         <div class="col-md-6 align-self-center">
           <div class="left-content">
-            <span>INFORMASI SISTEM PENILAIAN DOSEN</span>
-            <h4>Tonton video berikut untuk memahami cara kerja sistem <em>penilaian dosen</em></h4>
-            <p>Sistem ini dirancang untuk memudahkan mahasiswa dalam memberikan penilaian terhadap kinerja dosen selama proses perkuliahan. Penilaian dilakukan secara objektif dan rahasia untuk mendukung peningkatan mutu pengajaran.</p>
+            <span>INFORMASI KAMPUS STT TERPADU NURUL FIKRI</span>
+            <h4>Tonton video berikut untuk mengenal lebih jauh tentang <em>STT Terpadu Nurul Fikri</em></h4>
+            <p>STT Terpadu Nurul Fikri adalah sebuah perguruan tinggi berbasis teknologi informasi yang berlokasi di Depok, Jawa Barat. Kampus ini berdiri di bawah naungan Yayasan Nurul Fikri, sebuah yayasan pendidikan Islam yang telah lama dikenal aktif dalam bidang dakwah, pendidikan, dan teknologi.</p>
             <div class="main-button"><a rel="nofollow" href="https://nurulfikri.ac.id/" target="_parent">Informasi Lebih Lanjut</a></div>
           </div>
         </div>
@@ -341,7 +340,7 @@ https://templatemo.com/tm-557-grad-school
               <h4>Lihat Video</h4>
             </div>
             <figure>
-              <a href="https://www.youtube.com/watch?v=r9LtOG6pNUw" class="play"><img src="assets/images/bgkampus.jpg"></a>
+              <a href="https://youtu.be/2DOiSHymxMQ?si=MbJ_wPvbh_KLZbmm" class="playing"><img src="assets/images/bgkampus.jpg"></a>
             </figure>
           </article>
         </div>
