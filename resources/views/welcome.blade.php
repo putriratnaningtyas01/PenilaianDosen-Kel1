@@ -255,7 +255,7 @@ https://templatemo.com/tm-557-grad-school
         </div>
         <div class="owl-carousel owl-theme">
           <div class="item">
-            <img src="{{asset('assets/images/dosen1.png')}}" alt="Course #1">
+            <img src="{{asset('assets/images/dosen1.png')}}" alt="Course #1" style="height: 300px;">
             <div class="down-content">
               <h4>Dr. Sirojul Munir, S.Si, M.Kom</h4>
               <h4>Pembelajaran</h4>
@@ -271,7 +271,7 @@ https://templatemo.com/tm-557-grad-school
             </div>
           </div>
           <div class="item">
-            <img src="{{asset('assets/images/dosen3.png')}}" alt="Course #3" style="height: 318px;">
+            <img src="{{asset('assets/images/dosen3.png')}}" alt="Course #3" style="height: 339px;">
             <div class="down-content">
               <h4>MISNA ASQIA, S.Kom, M.Kom</h4>
               <h4>Pembelajaran</h4>
@@ -279,7 +279,7 @@ https://templatemo.com/tm-557-grad-school
             </div>
           </div>
           <div class="item">
-            <img src="{{asset('assets/images/dosen4.png')}}" alt="Course #4" style="height: 318px;">
+            <img src="{{asset('assets/images/dosen4.png')}}" alt="Course #4" style="height: 339px;">
             <div class="down-content">
               <h4>Krisna Panji, S.Kom., M.M</h4>
               <h4>Pembelajaran</h4>

@@ -90,4 +90,9 @@ class SemesterResource extends Resource
         return Auth::user()?->hasRole('mahasiswa');
     }
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()?->role === 'mahasiswa';
+    }
+
 }

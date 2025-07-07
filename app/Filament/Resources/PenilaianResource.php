@@ -11,6 +11,7 @@ use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
@@ -109,23 +110,28 @@ class PenilaianResource extends Resource
         ];
     }
 
-    public static function canCreate(): bool
-    {
-        return Auth::user()?->hasRole('mahasiswa');
-    }
-
     public static function canAccess(): bool
     {
         return Auth::user()?->hasAnyRole(['mahasiswa', 'dosen']);
     }
 
-    public static function canEdit($record): bool
+    public static function canViewAny(): bool
     {
-        return Auth::user()?->hasRole('mahasiswa');
+        return in_array(auth()->user()?->role, ['mahasiswa', 'dosen']);
     }
 
-    public static function canDelete($record): bool
+    public static function canCreate(): bool
     {
-        return Auth::user()?->hasRole('mahasiswa');
+        return auth()->user()?->role === 'mahasiswa';
+    }
+
+    public static function canEdit(Model $record): bool
+    {
+        return auth()->user()?->role === 'mahasiswa';
+    }
+
+    public static function canDelete(Model $record): bool
+    {
+        return auth()->user()?->role === 'mahasiswa';
     }
 }

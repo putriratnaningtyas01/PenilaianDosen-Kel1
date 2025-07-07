@@ -7,8 +7,7 @@ use App\Models\MahasiswaProfile;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
-use Filament\Infolists\Infolist;
-use Filament\Infolists\Components\TextEntry;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -129,28 +128,28 @@ class MahasiswaProfileResource extends Resource
         ];
     }
 
-    public static function canCreate(): bool
-    {
-        return Auth::user()?->hasRole('mahasiswa');
-    }
-
-    public static function canEdit($record): bool
-    {
-        return Auth::user()?->hasRole('mahasiswa');
-    }
-
-    public static function canDelete($record): bool
-    {
-        return Auth::user()?->hasRole('mahasiswa');
-    }
-
-    public static function canView($record): bool
-    {
-        return Auth::user()?->hasAnyRole(['mahasiswa', 'dosen']);
-    }
-
     public static function canAccess(): bool
     {
         return Auth::user()?->hasAnyRole(['mahasiswa', 'dosen']);
+    }
+
+    public static function canViewAny(): bool
+{
+    return in_array(auth()->user()?->role, ['mahasiswa', 'dosen']);
+}
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()?->role === 'mahasiswa';
+    }
+
+    public static function canEdit(Model $record): bool
+    {
+        return auth()->user()?->role === 'mahasiswa';
+    }
+
+    public static function canDelete(Model $record): bool
+    {
+        return auth()->user()?->role === 'mahasiswa';
     }
 }
