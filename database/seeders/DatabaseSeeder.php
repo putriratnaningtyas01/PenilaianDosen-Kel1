@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
                 'role' => 'dosen',
             ]
         );
-        $dosen->assignRole('dosen');
+        $dosen->syncRoles(['dosen']);
 
         // ✅ Tambahkan user mahasiswa
         $mahasiswa = User::firstOrCreate(

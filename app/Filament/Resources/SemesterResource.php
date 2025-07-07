@@ -84,15 +84,14 @@ class SemesterResource extends Resource
             'edit' => Pages\EditSemester::route('/{record}/edit'),
         ];
     }
-
     public static function canAccess(): bool
     {
-        return Auth::user()?->hasRole('mahasiswa');
+        return Auth::check() && Auth::user()->hasRole('mahasiswa');
     }
 
     public static function shouldRegisterNavigation(): bool
     {
-        return auth()->user()?->role === 'mahasiswa';
+        return Auth::check() && Auth::user()->hasRole('mahasiswa');
     }
 
 }

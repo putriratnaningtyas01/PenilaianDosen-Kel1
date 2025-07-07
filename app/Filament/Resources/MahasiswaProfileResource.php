@@ -130,26 +130,26 @@ class MahasiswaProfileResource extends Resource
 
     public static function canAccess(): bool
     {
-        return Auth::user()?->hasAnyRole(['mahasiswa', 'dosen']);
+        return Auth::check() && Auth::user()->hasAnyRole(['mahasiswa', 'dosen']);
     }
 
     public static function canViewAny(): bool
-{
-    return in_array(auth()->user()?->role, ['mahasiswa', 'dosen']);
-}
+    {
+        return Auth::check() && Auth::user()->hasAnyRole(['mahasiswa', 'dosen']);
+    }
 
     public static function canCreate(): bool
     {
-        return auth()->user()?->role === 'mahasiswa';
+        return Auth::check() && Auth::user()->hasRole('mahasiswa');
     }
 
     public static function canEdit(Model $record): bool
     {
-        return auth()->user()?->role === 'mahasiswa';
+        return Auth::check() && Auth::user()->hasRole('mahasiswa');
     }
 
     public static function canDelete(Model $record): bool
     {
-        return auth()->user()?->role === 'mahasiswa';
+        return Auth::check() && Auth::user()->hasRole('mahasiswa');
     }
 }

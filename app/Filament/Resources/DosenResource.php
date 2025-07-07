@@ -129,10 +129,10 @@ class DosenResource extends Resource
         ];
     }
 
-    
+
     public static function canAccess(): bool
     {
-        return Auth::user()?->hasRole('dosen');
+        return Auth::check() && Auth::user()->hasRole('dosen');
     }
 
 }
