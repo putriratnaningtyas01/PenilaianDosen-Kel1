@@ -15,7 +15,6 @@ class Dosen extends Model
         'email',
         'jabatan',
         'id_prodi',
-        'foto',
         'profil',
     ];
 

@@ -7,6 +7,7 @@ use App\Filament\Resources\DosenResource\RelationManagers;
 use App\Models\Dosen;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -46,19 +47,6 @@ class DosenResource extends Resource
                     ->relationship('prodi', 'nama_prodi')
                     ->required(),
 
-                Forms\Components\FileUpload::make('foto')
-                    ->label('Foto')
-                    ->directory('dosen-foto')
-                    ->image()
-                    ->imageEditor()
-                    ->downloadable()
-                    ->openable()
-                    ->previewable()
-                    ->preserveFilenames()
-                    ->columnSpanFull()
-                    ->disk('public')
-                    ->required(),
-
                 Forms\Components\Textarea::make('profil')
                     ->label('Profil')
                     ->required(),
@@ -95,9 +83,6 @@ class DosenResource extends Resource
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\ImageColumn::make('foto')
-                    ->label('Foto'),
-
                 Tables\Columns\TextColumn::make('profil')
                     ->label('Profil')
                     ->limit(30),
@@ -113,8 +98,13 @@ class DosenResource extends Resource
                     ->sortable(),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->successNotification(fn () => Notification::make()
+                        ->title('Mahasiswa berhasil dihapus')
+                        ->body('Satu mahasiswa telah berhasil dihapus!')
+                        ->success()),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -139,6 +129,7 @@ class DosenResource extends Resource
         ];
     }
 
+    
     public static function canAccess(): bool
     {
         return Auth::user()?->hasRole('dosen');

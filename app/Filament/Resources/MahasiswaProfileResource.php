@@ -3,17 +3,16 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\MahasiswaProfileResource\Pages;
-use App\Filament\Resources\MahasiswaProfileResource\RelationManagers;
 use App\Models\MahasiswaProfile;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
+use Filament\Infolists\Infolist;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Support\Facades\Auth;
 
@@ -99,8 +98,13 @@ class MahasiswaProfileResource extends Resource
                     ]),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->successNotification(fn () => Notification::make()
+                        ->title('Mahasiswa berhasil dihapus')
+                        ->body('Satu mahasiswa telah berhasil dihapus!')
+                        ->success()),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -130,11 +134,6 @@ class MahasiswaProfileResource extends Resource
         return Auth::user()?->hasRole('mahasiswa');
     }
 
-    public static function canAccess(): bool
-    {
-        return Auth::user()?->hasAnyRole(['mahasiswa', 'dosen']);
-    }
-
     public static function canEdit($record): bool
     {
         return Auth::user()?->hasRole('mahasiswa');
@@ -143,5 +142,15 @@ class MahasiswaProfileResource extends Resource
     public static function canDelete($record): bool
     {
         return Auth::user()?->hasRole('mahasiswa');
+    }
+
+    public static function canView($record): bool
+    {
+        return Auth::user()?->hasAnyRole(['mahasiswa', 'dosen']);
+    }
+
+    public static function canAccess(): bool
+    {
+        return Auth::user()?->hasAnyRole(['mahasiswa', 'dosen']);
     }
 }

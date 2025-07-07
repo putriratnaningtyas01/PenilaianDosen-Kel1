@@ -38,11 +38,41 @@ class KriteriaPenilaianSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
+                'nama_kriteria' => 'Kedisiplinan dalam kehadiran',
+                'bobot' => 4,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
                 'nama_kriteria' => 'Penilaian yang objektif',
                 'bobot' => 4,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'nama_kriteria' => 'Keterbukaan terhadap diskusi',
+                'bobot' => 3,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nama_kriteria' => 'Ketepatan waktu mengajar',
+                'bobot' => 5,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nama_kriteria' => 'Kemampuan menjawab pertanyaan mahasiswa',
+                'bobot' => 4,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nama_kriteria' => 'Penggunaan media pembelajaran',
+                'bobot' => 4,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
         ]);
     }
 }

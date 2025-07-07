@@ -35,6 +35,56 @@ class PengampuSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
+            [
+                'id_dosen' => 2,
+                'id_mk' => 3,
+                'id_semester' => 2,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'id_dosen' => 1,
+                'id_mk' => 2,
+                'id_semester' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+
+            ],
+            [
+                'id_dosen' => 2,
+                'id_mk' => 3,
+                'id_semester' => 3,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'id_dosen' => 2,
+                'id_mk' => 3,
+                'id_semester' => 3,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'id_dosen' => 3,
+                'id_mk' => 3,
+                'id_semester' => 3,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'id_dosen' => 1,
+                'id_mk' => 3,
+                'id_semester' => 3,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'id_dosen' => 2,
+                'id_mk' => 3,
+                'id_semester' => 1,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
         ]);
     }
 }

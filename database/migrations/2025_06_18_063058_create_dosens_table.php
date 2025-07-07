@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('jabatan', 50)->nullable();
             $table->unsignedBigInteger('id_prodi');
             $table->foreign('id_prodi')->references('id')->on('prodis')->onDelete('cascade');
-            $table->string('foto');
             $table->text('profil');
             $table->timestamps();
         });

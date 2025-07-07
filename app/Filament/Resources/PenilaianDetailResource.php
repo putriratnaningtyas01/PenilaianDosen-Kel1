@@ -10,8 +10,10 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Filament\Forms\Components\Select;
+use Filament\Notifications\Notification;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Model;
 
 class PenilaianDetailResource extends Resource
 {
@@ -70,8 +72,13 @@ class PenilaianDetailResource extends Resource
                 ->sortable(),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->successNotification(fn () => Notification::make()
+                        ->title('Mahasiswa berhasil dihapus')
+                        ->body('Satu mahasiswa telah berhasil dihapus!')
+                        ->success()),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -7,6 +7,7 @@ use App\Filament\Resources\SemesterResource\RelationManagers;
 use App\Models\Semester;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -53,8 +54,13 @@ class SemesterResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->successNotification(fn () => Notification::make()
+                        ->title('Mahasiswa berhasil dihapus')
+                        ->body('Satu mahasiswa telah berhasil dihapus!')
+                        ->success()),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -83,9 +89,5 @@ class SemesterResource extends Resource
     {
         return Auth::user()?->hasRole('mahasiswa');
     }
-    // public static function shouldRegisterNavigation(): bool
-    // {
-    //     return false;
-    //
 
 }

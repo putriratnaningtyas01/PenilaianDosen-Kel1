@@ -7,6 +7,7 @@ use App\Filament\Resources\KriteriaPenilaianResource\RelationManagers;
 use App\Models\KriteriaPenilaian;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -55,8 +56,13 @@ class KriteriaPenilaianResource extends Resource
                     ->sortable()
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->successNotification(fn () => Notification::make()
+                        ->title('Mahasiswa berhasil dihapus')
+                        ->body('Satu mahasiswa telah berhasil dihapus!')
+                        ->success()),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
