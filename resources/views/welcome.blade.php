@@ -46,7 +46,7 @@ https://templatemo.com/tm-557-grad-school
             <li><a href="#section2">Tujuan</a></li>
             <li><a href="#section3">Penilaian</a></li>
             <li><a href="#section4">Detail</a></li>
-            <li><a href="https://nurulfikri.ac.id/" rel="sponsored" class="external">URL</a></li>
+            <li><a href="https://nurulfikri.ac.id/" rel="sponsored" class="external" target="__blank">URL</a></li>
           </ul>
         </li>
         <li><a href="#section4">Dosen</a></li>
@@ -332,7 +332,7 @@ https://templatemo.com/tm-557-grad-school
             <span>INFORMASI KAMPUS STT TERPADU NURUL FIKRI</span>
             <h4>Tonton video berikut untuk mengenal lebih jauh tentang <em>STT Terpadu Nurul Fikri</em></h4>
             <p>STT Terpadu Nurul Fikri adalah sebuah perguruan tinggi berbasis teknologi informasi yang berlokasi di Depok, Jawa Barat. Kampus ini berdiri di bawah naungan Yayasan Nurul Fikri, sebuah yayasan pendidikan Islam yang telah lama dikenal aktif dalam bidang dakwah, pendidikan, dan teknologi.</p>
-            <div class="main-button"><a rel="nofollow" href="https://nurulfikri.ac.id/" target="_parent">Informasi Lebih Lanjut</a></div>
+            <div class="main-button"><a rel="nofollow" href="https://nurulfikri.ac.id/" class="external" target="__blank">Informasi Lebih Lanjut</a></div>
           </div>
         </div>
         <div class="col-md-6">
@@ -341,7 +341,7 @@ https://templatemo.com/tm-557-grad-school
               <h4>Lihat Video</h4>
             </div>
             <figure>
-              <a href="https://youtu.be/2DOiSHymxMQ?si=MbJ_wPvbh_KLZbmm" class="playing"><img src="assets/images/bgkampus.jpg"></a>
+              <a href="https://youtu.be/2DOiSHymxMQ?si=MbJ_wPvbh_KLZbmm" class="playing" class="external" target="__blank"><img src="assets/images/bgkampus.jpg"></a>
             </figure>
           </article>
         </div>
@@ -409,7 +409,7 @@ https://templatemo.com/tm-557-grad-school
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <p><i class="fa fa-copyright"></i> Copyright 2025 by Syamil
+          <p><i class="fa fa-copyright"></i> Copyright 2025 by Kelompok 1
 
            | Design: <a href="https://templatemo.com" rel="sponsored" target="_parent">Penilaian Dosen</a><br>
 
