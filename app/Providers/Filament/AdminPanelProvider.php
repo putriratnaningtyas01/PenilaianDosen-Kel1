@@ -29,6 +29,7 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->registration()
             ->passwordReset()
+            ->brandName('Sistem Penilaian Dosen')
             ->colors([
                 'primary' => Color::Amber,
             ])
